@@ -1,18 +1,9 @@
 import Head from 'next/head';
-import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 import type { ContentfulBlogPost } from '../../types/contentful';
 
-type ContentfulPathsResponse = {
-  data: {
-    blogPostCollection: {
-      items: ContentfulBlogPost[];
-    };
-  };
-};
-
-type ContentfulPropsResponse = {
+type ContentfulResponse = {
   data: {
     blogPostCollection: {
       items: ContentfulBlogPost[];
@@ -46,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   );
 
-  const { data }: ContentfulPathsResponse = await response.json();
+  const { data }: ContentfulResponse = await response.json();
 
   const slugs = data.blogPostCollection.items.map((post) => ({ params: { slug: post.slug } }));
 
@@ -101,7 +92,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  const { data }: ContentfulPropsResponse = await response.json();
+  const { data }: ContentfulResponse = await response.json();
 
   const [blogPostData] = data.blogPostCollection.items;
 
@@ -130,8 +121,6 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ blogPostData }) => (
     <p>
       This is the blog post page for <strong>{blogPostData.title}</strong>
     </p>
-
-    <Link href='/'>Go Back Home</Link>
   </div>
 );
 
