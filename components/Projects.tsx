@@ -1,6 +1,6 @@
 // custom types
 import Link from 'next/link';
-import type { ContentfulProjectGroup } from '../../types/contentful';
+import type { ContentfulProjectGroup } from '../types/contentful';
 
 // props type
 type ProjectsProps = {

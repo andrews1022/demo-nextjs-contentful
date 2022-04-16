@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 
@@ -124,6 +125,8 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ projectData }) => (
     <p>
       This is the project page for <strong>{projectData.title}</strong>
     </p>
+
+    <Link href='/'>Go Back Home</Link>
   </div>
 );
 
