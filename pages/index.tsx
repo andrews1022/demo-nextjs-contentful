@@ -8,20 +8,25 @@ import Projects from '../components/Projects';
 // custom types
 import type {
   ContentfulAboutMe,
+  ContentfulBlogPost,
   ContentfulContact,
   ContentfulHero,
   ContentfulProjectGroup
 } from '../types/contentful';
+import BlogPosts from '../components/BlogPosts';
 
 type ContentfulData = {
-  aboutMe: ContentfulAboutMe;
-  contact: ContentfulContact;
-  hero: ContentfulHero;
-  projectGroup: ContentfulProjectGroup;
+  blogPostCollection: {
+    items: ContentfulBlogPost[];
+  };
 };
 
 type ContentfulResponse = {
-  data: ContentfulData;
+  data: {
+    blogPostCollection: {
+      items: ContentfulBlogPost[];
+    };
+  };
 };
 
 const gql = String.raw;
@@ -39,31 +44,23 @@ export const getStaticProps: GetStaticProps = async () => {
       body: JSON.stringify({
         query: gql`
           query HomepageQuery {
-            projectGroup(id: "6hJ1c777JLjdLQ8GfoxwNG") {
-              copy
-              projectsCollection {
-                items {
-                  codeLink
-                  liveLink
-                  slug
-                  summary
+            blogPostCollection {
+              items {
+                image {
+                  description
+                  height
                   sys {
                     id
                   }
-                  techUsed
-                  thumbnail {
-                    description
-                    height
-                    sys {
-                      id
-                    }
-                    url
-                    width
-                  }
-                  title
+                  url
+                  width
                 }
+                slug
+                sys {
+                  id
+                }
+                title
               }
-              title
             }
           }
         `
@@ -81,11 +78,15 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 type HomeProps = {
-  data: ContentfulData;
+  data: {
+    blogPostCollection: {
+      items: ContentfulBlogPost[];
+    };
+  };
 };
 
 const Home: NextPage<HomeProps> = ({ data }) => {
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   return (
     <>
@@ -96,7 +97,8 @@ const Home: NextPage<HomeProps> = ({ data }) => {
       </Head>
 
       <main>
-        <Projects contentfulData={data.projectGroup} />
+        <BlogPosts contentfulData={data.blogPostCollection.items} />
+        {/* <Projects contentfulData={data.projectGroup} /> */}
       </main>
 
       <footer>
