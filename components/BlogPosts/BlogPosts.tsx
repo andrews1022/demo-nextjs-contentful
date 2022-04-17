@@ -6,6 +6,7 @@ import * as S from './BlogPosts.styles';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
+import NextImage from '../NextImage/NextImage';
 
 // props type
 type BlogPostsProps = {
@@ -17,14 +18,7 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
     <S.Grid>
       {posts.map((post) => (
         <S.Card key={post.sys.id}>
-          <Image
-            src={post.image.url}
-            alt={post.image.description}
-            height={post.image.height}
-            width={post.image.width}
-            placeholder='blur'
-            blurDataURL={post.image.url}
-          />
+          <NextImage imageData={post.image} />
 
           <S.CardBody>
             <S.PostTitle>{post.title}</S.PostTitle>

@@ -1,4 +1,5 @@
-import Image from 'next/image';
+// components
+import NextImage from '../NextImage/NextImage';
 
 // styled components
 import * as S from './Author.styles';
@@ -14,14 +15,7 @@ type AuthorProps = {
 const Author = ({ authorData }: AuthorProps) => (
   <S.Wrapper>
     <S.ImageWrapper>
-      <Image
-        src={authorData.image.url}
-        alt={authorData.image.description}
-        height={authorData.image.height}
-        width={authorData.image.width}
-        placeholder='blur'
-        blurDataURL={authorData.image.url}
-      />
+      <NextImage imageData={authorData.image} />
     </S.ImageWrapper>
 
     <S.TextWrapper className='text-wrapper'>

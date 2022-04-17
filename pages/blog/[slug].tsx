@@ -1,7 +1,10 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
+
+// components
+import Author from '../../components/Author/Author';
+import NextImage from '../../components/NextImage/NextImage';
 
 // styled components
 import * as S from '../../styles/blog.styles';
@@ -14,7 +17,6 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
-import Author from '../../components/Author/Author';
 
 type GraphQLResponse = {
   data: {
@@ -134,14 +136,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
       <S.PostTitle>{blogPostData.title}</S.PostTitle>
 
       <S.ImageWrapper>
-        <Image
-          src={blogPostData.image.url}
-          alt={blogPostData.image.description}
-          height={blogPostData.image.height}
-          width={blogPostData.image.width}
-          placeholder='blur'
-          blurDataURL={blogPostData.image.url}
-        />
+        <NextImage imageData={blogPostData.image} />
       </S.ImageWrapper>
 
       <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
