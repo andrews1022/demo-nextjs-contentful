@@ -37,6 +37,14 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
 
             <S.PreviewText>{post.previewText}</S.PreviewText>
 
+            <ul className='categories-list'>
+              {post.categoriesCollection.items.map((category) => (
+                <li key={category.sys.id}>{category.name}</li>
+              ))}
+            </ul>
+
+            <br />
+
             <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
           </S.CardBody>
         </S.Card>

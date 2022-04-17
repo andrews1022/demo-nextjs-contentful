@@ -36,6 +36,15 @@ export const getStaticProps: GetStaticProps = async () => {
           query HomepageQuery {
             blogPostCollection(order: [datePublished_DESC]) {
               items {
+                categoriesCollection {
+                  items {
+                    sys {
+                      id
+                    }
+                    name
+                    slug
+                  }
+                }
                 content
                 image {
                   ...ImageFields

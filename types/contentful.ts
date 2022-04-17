@@ -1,10 +1,12 @@
 // reusable
+export type ContentfulId = {
+  id: string;
+};
+
 export type ContentfulImage = {
   description: string;
   height: number;
-  sys: {
-    id: string;
-  };
+  sys: ContentfulId;
   url: string;
   width: number;
 };
@@ -16,15 +18,22 @@ export type ContentfulAuthor = {
   name: string;
 };
 
+export type ContentfulCategory = {
+  sys: ContentfulId;
+  name: string;
+  slug: string;
+};
+
 export type ContentfulBlogPost = {
   author: ContentfulAuthor;
+  categoriesCollection: {
+    items: ContentfulCategory[];
+  };
   content: string;
   datePublished: string;
   image: ContentfulImage;
   previewText: string;
   slug: string;
-  sys: {
-    id: string;
-  };
+  sys: ContentfulId;
   title: string;
 };
