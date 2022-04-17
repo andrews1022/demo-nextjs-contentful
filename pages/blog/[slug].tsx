@@ -4,7 +4,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 
 // styled components
-import * as S from './blog.styles';
+import * as S from '../../styles/blog.styles';
 
 // graphql fragments
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
