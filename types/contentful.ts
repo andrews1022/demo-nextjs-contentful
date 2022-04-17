@@ -21,6 +21,7 @@ export type ContentfulBlogPost = {
   content: string;
   datePublished: string;
   image: ContentfulImage;
+  previewText: string;
   slug: string;
   sys: {
     id: string;

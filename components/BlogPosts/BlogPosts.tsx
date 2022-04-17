@@ -27,11 +27,17 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
           <NextImage imageData={post.image} />
 
           <S.CardBody>
-            <S.PostTitle>{post.title}</S.PostTitle>
+            <S.PostTitle>
+              {post.title}
+
+              <span>&bull;</span>
+
+              <S.TimeToRead>{timeToRead(post.content)} min read</S.TimeToRead>
+            </S.PostTitle>
+
+            <S.PreviewText>{post.previewText}</S.PreviewText>
 
             <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
-
-            <S.TimeToRead>{timeToRead(post.content)} min read</S.TimeToRead>
           </S.CardBody>
         </S.Card>
       ))}

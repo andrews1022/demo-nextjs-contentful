@@ -63,13 +63,18 @@ export const CardBody = styled.div`
 `;
 
 export const PostTitle = styled.h2`
-  font-size: ${({ theme }) => theme.fontSizes.copy.large};
+  display: flex;
+  align-items: center;
+  font-size: ${({ theme }) => theme.fontSizes.copy.xlarge};
   font-weight: ${({ theme }) => theme.fontWeights.normal};
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+`;
+
+export const PreviewText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.copy.medium};
+  margin: 1.25rem 0;
 `;
 
 export const TimeToRead = styled.span`
-  display: block;
   font-size: ${({ theme }) => theme.fontSizes.copy.small};
-  margin-top: 2rem;
 `;

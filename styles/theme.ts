@@ -40,7 +40,8 @@ const theme = {
     copy: {
       small: '0.875rem',
       medium: '1rem',
-      large: '1.125rem'
+      large: '1.125rem',
+      xlarge: '1.25rem'
     },
     heading: {
       small: 'clamp(1.25rem, 5vw, 2rem)',

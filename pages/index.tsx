@@ -40,6 +40,7 @@ export const getStaticProps: GetStaticProps = async () => {
                 image {
                   ...ImageFields
                 }
+                previewText
                 slug
                 sys {
                   id
