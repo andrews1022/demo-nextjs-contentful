@@ -1,5 +1,4 @@
 // next
-import Head from 'next/head';
 import type { GetStaticProps, NextPage } from 'next';
 
 // custom types
@@ -64,13 +63,14 @@ export const getStaticProps: GetStaticProps = async () => {
 
 type HomeProps = ContentfulResponse;
 
+// eslint-disable-next-line arrow-body-style
 const Home: NextPage<HomeProps> = ({ data }) => {
   // eslint-disable-next-line no-console
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   return (
     <main>
-      <BlogPosts contentfulData={data.blogPostCollection.items} />
+      <BlogPosts posts={data.blogPostCollection.items} />
     </main>
   );
 };

@@ -49,6 +49,7 @@
     "no-underscore-dangle": "warn",
     "no-unused-vars": "warn",
     "no-use-before-define": "off",
+    "no-useless-rename": "warn",
     "no-useless-return": "warn",
     "object-curly-newline": "off",
     "object-curly-spacing": "warn",

@@ -1,14 +1,16 @@
-// custom types
 import Link from 'next/link';
+
+// custom types
 import type { ContentfulBlogPost } from '../types/contentful';
 
 type BlogPostsProps = {
-  contentfulData: ContentfulBlogPost[];
+  posts: ContentfulBlogPost[];
 };
 
 // destructure and rename to posts
-const BlogPosts = ({ contentfulData: posts }: BlogPostsProps) => {
-  console.log('posts: ', posts);
+// eslint-disable-next-line arrow-body-style
+const BlogPosts = ({ posts }: BlogPostsProps) => {
+  // console.log('posts: ', posts);
 
   return (
     <div>
@@ -18,7 +20,10 @@ const BlogPosts = ({ contentfulData: posts }: BlogPostsProps) => {
         <div key={post.sys.id}>
           <h3>{post.title}</h3>
           <p>
-            View post <Link href={`/blog/${post.slug}`}>here</Link>
+            View post{' '}
+            <button style={{ color: 'blue' }} type='button'>
+              <Link href={`/blog/${post.slug}`}>here</Link>
+            </button>
           </p>
         </div>
       ))}

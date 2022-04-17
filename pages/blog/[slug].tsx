@@ -1,6 +1,12 @@
 import Head from 'next/head';
+import ReactMarkdown from 'react-markdown';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
+
+// styled components
+import * as S from './blog.styles';
+
+// custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
 
 type ContentfulResponse = {
@@ -25,7 +31,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       method: 'POST',
       body: JSON.stringify({
         query: gql`
-          query ProjectPageQuery {
+          query BlogPostSlugsQuery {
             blogPostCollection {
               items {
                 slug
@@ -67,9 +73,22 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       method: 'POST',
       body: JSON.stringify({
         query: gql`
-          query SingleProjectQuery($slug: String!) {
+          query SingleBlogPostQuery($slug: String!) {
             blogPostCollection(where: { slug: $slug }, limit: 1) {
               items {
+                author {
+                  bio
+                  image {
+                    description
+                    height
+                    sys {
+                      id
+                    }
+                    url
+                    width
+                  }
+                  name
+                }
                 content
                 image {
                   description
@@ -104,11 +123,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 };
 
 // props type
-type ProjectPageProps = {
+type BlogPostPageProps = {
   blogPostData: ContentfulBlogPost;
 };
 
-const ProjectPage: NextPage<ProjectPageProps> = ({ blogPostData }) => (
+const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
   <div>
     {/* dyanmic head for seo */}
     <Head>
@@ -116,12 +135,10 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ blogPostData }) => (
       <meta name='description' content={blogPostData.title} />
     </Head>
 
-    <h1>Blog Post Page</h1>
+    <h1 className='title'>{blogPostData.title}</h1>
 
-    <p>
-      This is the blog post page for <strong>{blogPostData.title}</strong>
-    </p>
+    <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
   </div>
 );
 
-export default ProjectPage;
+export default BlogPostPage;
