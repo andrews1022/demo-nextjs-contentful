@@ -4,21 +4,22 @@ import type { GetStaticProps, NextPage } from 'next';
 // components
 import BlogPosts from '../components/BlogPosts/BlogPosts';
 
+// utils
+import { gql } from '../utils/gql';
+
 // graphql fragments
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../types/contentful';
 
-type ContentfulResponse = {
+type GraphQLResponse = {
   data: {
     blogPostCollection: {
       items: ContentfulBlogPost[];
     };
   };
 };
-
-const gql = String.raw;
 
 export const getStaticProps: GetStaticProps = async () => {
   // get contentful data
@@ -53,7 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   );
 
-  const { data }: ContentfulResponse = await response.json();
+  const { data }: GraphQLResponse = await response.json();
 
   return {
     props: {
@@ -62,7 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-type HomeProps = ContentfulResponse;
+type HomeProps = GraphQLResponse;
 
 const Home: NextPage<HomeProps> = ({ data }) => (
   <main>

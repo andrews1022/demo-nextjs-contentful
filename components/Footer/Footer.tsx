@@ -1,10 +1,13 @@
+// styled components
+import * as S from './Footer.styles';
+
 const Footer = () => (
-  <footer style={{ backgroundColor: 'lightblue' }}>
+  <S.Footer>
     <p>
       &copy; {new Date().getFullYear()} all rights reserved <span> | </span> designed and built by
       andrew shearer
     </p>
-  </footer>
+  </S.Footer>
 );
 
 export default Footer;

@@ -1,44 +1,40 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+// styled components
+import * as S from './BlogPosts.styles';
+
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
 
+// props type
 type BlogPostsProps = {
   posts: ContentfulBlogPost[];
 };
 
-const dummyStyles = {
-  border: '1px solid red',
-  margin: '2rem auto',
-  padding: '1rem',
-  width: '90%'
-};
-
 const BlogPosts = ({ posts }: BlogPostsProps) => (
-  <div>
-    <h2>Blog Posts</h2>
+  <S.Wrapper>
+    <S.Grid>
+      {posts.map((post) => (
+        <S.Card key={post.sys.id}>
+          <Image
+            src={post.image.url}
+            alt={post.image.description}
+            height={post.image.height}
+            width={post.image.width}
+            placeholder='blur'
+            blurDataURL={post.image.url}
+          />
 
-    {posts.map((post) => (
-      <div key={post.sys.id} style={dummyStyles}>
-        <Image
-          src={post.image.url}
-          alt={post.image.description}
-          height={post.image.height}
-          width={post.image.width}
-        />
+          <S.CardBody>
+            <S.PostTitle>{post.title}</S.PostTitle>
 
-        <h3>{post.title}</h3>
-
-        <p>
-          View post{' '}
-          <button style={{ color: 'blue' }} type='button'>
-            <Link href={`/blog/${post.slug}`}>here</Link>
-          </button>
-        </p>
-      </div>
-    ))}
-  </div>
+            <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
+          </S.CardBody>
+        </S.Card>
+      ))}
+    </S.Grid>
+  </S.Wrapper>
 );
 
 export default BlogPosts;

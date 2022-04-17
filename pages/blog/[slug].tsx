@@ -6,21 +6,22 @@ import type { ParsedUrlQuery } from 'querystring';
 // styled components
 import * as S from '../../styles/blog.styles';
 
+// utils
+import { gql } from '../../utils/gql';
+
 // graphql fragments
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
 
-type ContentfulResponse = {
+type GraphQLResponse = {
   data: {
     blogPostCollection: {
       items: ContentfulBlogPost[];
     };
   };
 };
-
-const gql = String.raw;
 
 export const getStaticPaths: GetStaticPaths = async () => {
   // get contentful data
@@ -46,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   );
 
-  const { data }: ContentfulResponse = await response.json();
+  const { data }: GraphQLResponse = await response.json();
 
   const slugs = data.blogPostCollection.items.map((post) => ({ params: { slug: post.slug } }));
 
@@ -104,7 +105,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  const { data }: ContentfulResponse = await response.json();
+  const { data }: GraphQLResponse = await response.json();
 
   const [blogPostData] = data.blogPostCollection.items;
 
@@ -133,6 +134,8 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
       alt={blogPostData.image.description}
       height={blogPostData.image.height}
       width={blogPostData.image.width}
+      placeholder='blur'
+      blurDataURL={blogPostData.image.url}
     />
 
     <h1 className='title'>{blogPostData.title}</h1>

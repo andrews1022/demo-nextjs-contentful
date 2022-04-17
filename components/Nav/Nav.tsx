@@ -1,13 +1,18 @@
 import Link from 'next/link';
 
-const Nav = () => (
-  <header style={{ backgroundColor: 'lightcoral' }}>
-    <strong style={{ marginRight: '2rem' }}>Next.js Contentful Blog</strong>
+// styled components
+import * as S from './Nav.styles';
 
-    <Link href='/'>
-      <button type='button'>Go Back Home</button>
-    </Link>
-  </header>
+const Nav = () => (
+  <S.Header>
+    <nav className='nav'>
+      <ul>
+        <li>
+          <Link href='/'>Next.js Contentful Blog</Link>
+        </li>
+      </ul>
+    </nav>
+  </S.Header>
 );
 
 export default Nav;

@@ -26,7 +26,7 @@ const theme = {
     sapphire: '#06113c', // dark blue
     carrot: '#ff8c32', // orange
     gainsboro: '#ddd', // light grey
-    whiteSmoke: '#eee', // off-white grey
+    whiteSmoke: '#f9f9f9', // off-white grey
     nero: '#141414' // dark grey
   },
   fonts: {
@@ -37,7 +37,29 @@ const theme = {
     bold: 700
   },
   fontSizes: {
-    // add font sizes here
+    copy: {
+      small: '0.875rem',
+      medium: '1rem',
+      large: '1.125rem'
+    },
+    heading: {
+      small: '2rem',
+      medium: '3.25rem',
+      large: '4.5rem'
+    }
+  },
+  lineHeights: {
+    none: 1,
+    tight: 1.25,
+    snug: 1.375,
+    normal: 1.5,
+    relaxed: 1.625,
+    loose: 2
+  },
+  transitions: {
+    short: 'all 175ms ease-in-out',
+    medium: 'all 350ms ease-in-out',
+    long: 'all 525ms ease-in-out'
   }
 };
 
