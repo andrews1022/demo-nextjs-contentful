@@ -8,7 +8,7 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => (
-  <div className='layout-wrapper'>
+  <>
     <Head>
       <title>Andrew Shearer Dev Portfolio</title>
       <meta name='description' content="Andrew Shearer's front end developer portfolio" />
@@ -20,7 +20,7 @@ const Layout = ({ children }: LayoutProps) => (
     <main>{children}</main>
 
     <Footer />
-  </div>
+  </>
 );
 
 export default Layout;

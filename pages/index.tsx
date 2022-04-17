@@ -1,6 +1,9 @@
 // next
 import type { GetStaticProps, NextPage } from 'next';
 
+// graphql fragments
+import { FRAGMENT_CONTENTFUL_IMAGE } from '../graphql/fragments';
+
 // custom types
 import type { ContentfulBlogPost } from '../types/contentful';
 import BlogPosts from '../components/BlogPosts';
@@ -31,13 +34,7 @@ export const getStaticProps: GetStaticProps = async () => {
             blogPostCollection {
               items {
                 image {
-                  description
-                  height
-                  sys {
-                    id
-                  }
-                  url
-                  width
+                  ...ImageFields
                 }
                 slug
                 sys {
@@ -47,6 +44,8 @@ export const getStaticProps: GetStaticProps = async () => {
               }
             }
           }
+
+          ${FRAGMENT_CONTENTFUL_IMAGE}
         `
       })
     }
@@ -63,16 +62,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
 type HomeProps = ContentfulResponse;
 
-// eslint-disable-next-line arrow-body-style
-const Home: NextPage<HomeProps> = ({ data }) => {
-  // eslint-disable-next-line no-console
-  // console.log('data: ', data);
-
-  return (
-    <main>
-      <BlogPosts posts={data.blogPostCollection.items} />
-    </main>
-  );
-};
+const Home: NextPage<HomeProps> = ({ data }) => (
+  <main>
+    <BlogPosts posts={data.blogPostCollection.items} />
+  </main>
+);
 
 export default Home;

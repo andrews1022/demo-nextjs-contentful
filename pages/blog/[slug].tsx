@@ -1,10 +1,13 @@
 import Head from 'next/head';
-import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import type { ParsedUrlQuery } from 'querystring';
 
 // styled components
 import * as S from './blog.styles';
+
+// graphql fragments
+import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
@@ -79,30 +82,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 author {
                   bio
                   image {
-                    description
-                    height
-                    sys {
-                      id
-                    }
-                    url
-                    width
+                    ...ImageFields
                   }
                   name
                 }
                 content
                 image {
-                  description
-                  height
-                  sys {
-                    id
-                  }
-                  url
-                  width
+                  ...ImageFields
                 }
                 title
               }
             }
           }
+
+          ${FRAGMENT_CONTENTFUL_IMAGE}
         `,
         variables: {
           slug
@@ -128,17 +121,24 @@ type BlogPostPageProps = {
 };
 
 const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
-  <div>
+  <>
     {/* dyanmic head for seo */}
     <Head>
       <title>{blogPostData.title} | Andrew Shearer Dev Portfolio</title>
       <meta name='description' content={blogPostData.title} />
     </Head>
 
+    <Image
+      src={blogPostData.image.url}
+      alt={blogPostData.image.description}
+      height={blogPostData.image.height}
+      width={blogPostData.image.width}
+    />
+
     <h1 className='title'>{blogPostData.title}</h1>
 
     <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
-  </div>
+  </>
 );
 
 export default BlogPostPage;
