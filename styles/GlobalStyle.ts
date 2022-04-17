@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 import theme from './theme';
 
 // destructured theme properties
-const { colors, fonts, mediaQueries } = theme;
+const { colors, fonts, fontSizes, lineHeights, mediaQueries } = theme;
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -32,7 +32,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    font-size: 1.125rem;
+    font-size: ${fontSizes.copy.large};
+    line-height: ${lineHeights.normal};
   }
 
   button,
@@ -68,6 +69,7 @@ const GlobalStyle = createGlobalStyle`
 
   ol,
   ul {
+    line-height: ${lineHeights.normal};
     list-style: none;
   }
 

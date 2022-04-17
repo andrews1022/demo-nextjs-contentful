@@ -129,18 +129,22 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
       <meta name='description' content={blogPostData.title} />
     </Head>
 
-    <Image
-      src={blogPostData.image.url}
-      alt={blogPostData.image.description}
-      height={blogPostData.image.height}
-      width={blogPostData.image.width}
-      placeholder='blur'
-      blurDataURL={blogPostData.image.url}
-    />
+    <S.Wrapper>
+      <S.PostTitle>{blogPostData.title}</S.PostTitle>
 
-    <h1 className='title'>{blogPostData.title}</h1>
+      <S.ImageWrapper>
+        <Image
+          src={blogPostData.image.url}
+          alt={blogPostData.image.description}
+          height={blogPostData.image.height}
+          width={blogPostData.image.width}
+          placeholder='blur'
+          blurDataURL={blogPostData.image.url}
+        />
+      </S.ImageWrapper>
 
-    <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
+      <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
+    </S.Wrapper>
   </>
 );
 
