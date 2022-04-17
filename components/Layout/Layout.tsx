@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import type { ReactNode } from 'react';
-import Footer from './Footer';
-import Nav from './Nav';
+import Footer from '../Footer/Footer';
+import Nav from '../Nav/Nav';
 
 type LayoutProps = {
   children: ReactNode;

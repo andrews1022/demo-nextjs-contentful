@@ -8,7 +8,7 @@ import type { DocumentContext, DocumentInitialProps } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
-  static getInitialProps = async (ctx: DocumentContext): Promise<DocumentInitialProps> => {
+  static getInitialProps = async (ctx: DocumentContext): Promise<any> => {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -20,6 +20,7 @@ class MyDocument extends Document {
 
       const initialProps = await Document.getInitialProps(ctx);
 
+      // can't use DocumentInitialProps as Promise type argument otherwise styles throws an error
       return {
         ...initialProps,
         styles: (

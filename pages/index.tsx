@@ -1,12 +1,14 @@
 // next
 import type { GetStaticProps, NextPage } from 'next';
 
+// components
+import BlogPosts from '../components/BlogPosts/BlogPosts';
+
 // graphql fragments
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../types/contentful';
-import BlogPosts from '../components/BlogPosts';
 
 type ContentfulResponse = {
   data: {

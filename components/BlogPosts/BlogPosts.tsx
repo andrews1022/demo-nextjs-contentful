@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // custom types
-import type { ContentfulBlogPost } from '../types/contentful';
+import type { ContentfulBlogPost } from '../../types/contentful';
 
 type BlogPostsProps = {
   posts: ContentfulBlogPost[];
