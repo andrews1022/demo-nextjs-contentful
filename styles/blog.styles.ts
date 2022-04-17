@@ -20,7 +20,7 @@ export const ImageWrapper = styled.div`
   overflow: hidden;
 
   & > span {
-    height: 100%;
+    height: 100% !important; /* need important to override default styles */
 
     img {
       object-fit: cover;

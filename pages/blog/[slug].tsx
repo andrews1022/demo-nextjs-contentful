@@ -14,6 +14,7 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
+import Author from '../../components/Author/Author';
 
 type GraphQLResponse = {
   data: {
@@ -144,6 +145,8 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
       </S.ImageWrapper>
 
       <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
+
+      <Author authorData={blogPostData.author} />
     </S.Wrapper>
   </>
 );
