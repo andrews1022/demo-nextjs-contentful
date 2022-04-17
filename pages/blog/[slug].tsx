@@ -11,6 +11,8 @@ import * as S from '../../styles/blog.styles';
 
 // utils
 import { gql } from '../../utils/gql';
+import { formatDate } from '../../utils/formatDate';
+import { timeToRead } from '../../utils/timeToRead';
 
 // graphql fragments
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
@@ -91,6 +93,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                   name
                 }
                 content
+                datePublished
                 image {
                   ...ImageFields
                 }
@@ -138,6 +141,20 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
       <S.ImageWrapper>
         <NextImage imageData={blogPostData.image} />
       </S.ImageWrapper>
+
+      <S.InfoWrapper>
+        <p>
+          <strong>Date Published: </strong>
+          <span>{formatDate(blogPostData.datePublished)}</span>
+        </p>
+
+        <strong>&bull;</strong>
+
+        <p>
+          <strong>Estimated Time to Read: </strong>
+          <span>{timeToRead(blogPostData.content)} min</span>
+        </p>
+      </S.InfoWrapper>
 
       <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
 

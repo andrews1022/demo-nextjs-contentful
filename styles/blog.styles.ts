@@ -29,6 +29,18 @@ export const ImageWrapper = styled.div`
   }
 `;
 
+export const InfoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  @media ${({ theme }) => theme.mediaQueries.tabletPortrait} {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+`;
+
 export const StyledReactMarkdown = styled(ReactMarkdown)`
   /* add spacing to all these elements */
   h1,

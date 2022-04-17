@@ -19,6 +19,7 @@ export type ContentfulAuthor = {
 export type ContentfulBlogPost = {
   author: ContentfulAuthor;
   content: string;
+  datePublished: string;
   image: ContentfulImage;
   slug: string;
   sys: {

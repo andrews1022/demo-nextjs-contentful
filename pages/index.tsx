@@ -34,8 +34,9 @@ export const getStaticProps: GetStaticProps = async () => {
       body: JSON.stringify({
         query: gql`
           query HomepageQuery {
-            blogPostCollection {
+            blogPostCollection(order: [datePublished_DESC]) {
               items {
+                content
                 image {
                   ...ImageFields
                 }

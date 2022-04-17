@@ -6,6 +6,11 @@ export const Wrapper = styled.div`
   width: 90%;
 `;
 
+export const MainHeading = styled.h1`
+  font-size: ${({ theme }) => theme.fontSizes.heading.large};
+  margin-bottom: 3.5vw;
+`;
+
 export const Grid = styled.div`
   display: grid;
   grid-gap: 3.5vw;
@@ -61,4 +66,10 @@ export const PostTitle = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes.copy.large};
   font-weight: ${({ theme }) => theme.fontWeights.normal};
   margin-bottom: 1rem;
+`;
+
+export const TimeToRead = styled.span`
+  display: block;
+  font-size: ${({ theme }) => theme.fontSizes.copy.small};
+  margin-top: 2rem;
 `;

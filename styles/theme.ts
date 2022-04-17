@@ -43,9 +43,9 @@ const theme = {
       large: '1.125rem'
     },
     heading: {
-      small: '2rem',
-      medium: '3.25rem',
-      large: '4.5rem'
+      small: 'clamp(1.25rem, 5vw, 2rem)',
+      medium: 'clamp(2rem, 5vw, 3.25rem)',
+      large: 'clamp(2.5rem, 5vw, 4.5rem)'
     }
   },
   lineHeights: {

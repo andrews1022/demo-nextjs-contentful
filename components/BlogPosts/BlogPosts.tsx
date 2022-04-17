@@ -1,12 +1,16 @@
-import Image from 'next/image';
 import Link from 'next/link';
+
+// components
+import NextImage from '../NextImage/NextImage';
 
 // styled components
 import * as S from './BlogPosts.styles';
 
+// utils
+import { timeToRead } from '../../utils/timeToRead';
+
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
-import NextImage from '../NextImage/NextImage';
 
 // props type
 type BlogPostsProps = {
@@ -15,6 +19,8 @@ type BlogPostsProps = {
 
 const BlogPosts = ({ posts }: BlogPostsProps) => (
   <S.Wrapper>
+    <S.MainHeading>Blog Posts</S.MainHeading>
+
     <S.Grid>
       {posts.map((post) => (
         <S.Card key={post.sys.id}>
@@ -24,6 +30,8 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
             <S.PostTitle>{post.title}</S.PostTitle>
 
             <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
+
+            <S.TimeToRead>{timeToRead(post.content)} min read</S.TimeToRead>
           </S.CardBody>
         </S.Card>
       ))}
