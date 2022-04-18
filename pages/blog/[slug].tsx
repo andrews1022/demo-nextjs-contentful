@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { ParsedUrlQuery } from 'querystring';
 
 // components
 import Author from '../../components/Author/Author';
@@ -19,6 +18,7 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
+import type { IParams } from '../../types/global';
 
 type GraphQLResponse = {
   data: {
@@ -60,11 +60,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: slugs,
     fallback: false // show 404 page
   };
-};
-
-// extend interface using type keyword
-type IParams = ParsedUrlQuery & {
-  slug: string;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

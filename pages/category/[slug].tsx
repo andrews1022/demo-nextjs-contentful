@@ -1,15 +1,16 @@
+import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import type { ParsedUrlQuery } from 'querystring';
+
+// styled components
+import { MainHeading } from '../../components/UI/MainHeading';
 
 // utils
 import { gql } from '../../utils/gql';
 
 // custom types
 import type { ContentfulBlogPost, ContentfulCategory } from '../../types/contentful';
-import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
-import BlogPosts from '../../components/BlogPosts/BlogPosts';
-import { MainHeading } from '../../components/UI/MainHeading';
-import Head from 'next/head';
+import type { IParams } from '../../types/global';
+import Simple from '../../components/BlogPosts/Simple/Simple';
 
 type PathsGraphQLResponse = {
   data: {
@@ -55,21 +56,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-// extend interface using type keyword
-type IParams = ParsedUrlQuery & {
-  slug: string;
-};
-
 type PropsGraphQLResponse = {
   data: {
     categoryCollection: {
       items: {
-        name: string;
         linkedFrom: {
           blogPostCollection: {
             items: ContentfulBlogPost[];
           };
         };
+        name: string;
       }[];
     };
   };
@@ -93,7 +89,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           query PostByCategoryQuery($slug: String!) {
             categoryCollection(where: { slug: $slug }) {
               items {
-                name
                 linkedFrom {
                   blogPostCollection {
                     items {
@@ -106,6 +101,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                     }
                   }
                 }
+                name
               }
             }
           }
@@ -130,21 +126,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 type CategoryPageProps = {
   blogPostData: {
-    name: string;
     linkedFrom: {
       blogPostCollection: {
         items: ContentfulBlogPost[];
       };
     };
+    name: string;
   }[];
 };
 
 const CategoryPage: NextPage<CategoryPageProps> = ({ blogPostData }) => {
-  // console.log('blogPostData: ', blogPostData);
-
   // destructure the one item out of blogPostData array
   const [data] = blogPostData;
-  // console.log('data: ', data);
 
   return (
     <>
@@ -158,11 +151,7 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ blogPostData }) => {
         <span style={{ fontWeight: 'normal' }}>Category Page for</span> {data.name}
       </MainHeading>
 
-      <div className='grid'>
-        {data.linkedFrom.blogPostCollection.items.map((post) => (
-          <h3 key={post.title}>{post.title}</h3>
-        ))}
-      </div>
+      <Simple posts={data.linkedFrom.blogPostCollection.items} />
     </>
   );
 };

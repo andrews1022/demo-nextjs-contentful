@@ -1,26 +1,24 @@
 import Link from 'next/link';
 
 // components
-import NextImage from '../NextImage/NextImage';
+import NextImage from '../../NextImage/NextImage';
 
 // styled components
-import * as S from './BlogPosts.styles';
+import * as S from './Complex.styles';
 
 // utils
-import { timeToRead } from '../../utils/timeToRead';
+import { timeToRead } from '../../../utils/timeToRead';
 
 // custom types
-import type { ContentfulBlogPost } from '../../types/contentful';
+import type { ContentfulBlogPost } from '../../../types/contentful';
 
 // props type
-type BlogPostsProps = {
+type ComplexProps = {
   posts: ContentfulBlogPost[];
 };
 
-const BlogPosts = ({ posts }: BlogPostsProps) => (
+const Complex = ({ posts }: ComplexProps) => (
   <S.Wrapper>
-    {/* <S.MainHeading>Blog Posts</S.MainHeading> */}
-
     <S.Grid>
       {posts.map((post) => (
         <S.Card key={post.sys.id}>
@@ -37,15 +35,13 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
 
             <S.PreviewText>{post.previewText}</S.PreviewText>
 
-            <ul className='categories-list'>
+            <S.CategoriesList>
               {post.categoriesCollection.items.map((category) => (
-                <li key={category.sys.id}>
+                <S.CategoryItem key={category.sys.id} category={category.name}>
                   <Link href={`/category/${category.slug}`}>{category.name}</Link>
-                </li>
+                </S.CategoryItem>
               ))}
-            </ul>
-
-            <br />
+            </S.CategoriesList>
 
             <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
           </S.CardBody>
@@ -55,4 +51,4 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
   </S.Wrapper>
 );
 
-export default BlogPosts;
+export default Complex;

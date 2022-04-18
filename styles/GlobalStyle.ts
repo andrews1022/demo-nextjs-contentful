@@ -98,6 +98,12 @@ const GlobalStyle = createGlobalStyle`
     max-width: 100%;
     zoom: 1;
   }
+
+  #__next {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 `;
 
 export default GlobalStyle;

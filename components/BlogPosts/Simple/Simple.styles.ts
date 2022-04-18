@@ -42,7 +42,7 @@ export const Card = styled.div`
 export const CardBody = styled.div`
   background-color: ${({ theme }) => theme.colors.whiteSmoke};
   margin-top: -4px;
-  padding: 1.5rem;
+  padding: 2rem;
 
   a {
     font-weight: ${({ theme }) => theme.fontWeights.bold};
@@ -68,8 +68,4 @@ export const PostTitle = styled.h2`
 export const PreviewText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.copy.medium};
   margin: 1.25rem 0;
-`;
-
-export const TimeToRead = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.copy.small};
 `;

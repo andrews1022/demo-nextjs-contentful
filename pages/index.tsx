@@ -1,8 +1,7 @@
-// next
 import type { GetStaticProps, NextPage } from 'next';
 
 // components
-import BlogPosts from '../components/BlogPosts/BlogPosts';
+import Complex from '../components/BlogPosts/Complex/Complex';
 
 // utils
 import { gql } from '../utils/gql';
@@ -81,7 +80,7 @@ const Home: NextPage<HomeProps> = ({ data }) => (
   <main>
     <MainHeading>Blog Posts</MainHeading>
 
-    <BlogPosts posts={data.blogPostCollection.items} />
+    <Complex posts={data.blogPostCollection.items} />
   </main>
 );
 
