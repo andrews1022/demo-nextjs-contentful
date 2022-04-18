@@ -4,8 +4,7 @@ import Link from 'next/link';
 import NextImage from '../../NextImage/NextImage';
 
 // styled components
-import * as S from './Complex.styles';
-import { Wrapper } from '../../UI/Wrapper';
+import * as S from '../BlogPosts.styles';
 
 // utils
 import { timeToRead } from '../../../utils/timeToRead';
@@ -19,37 +18,35 @@ type ComplexProps = {
 };
 
 const Complex = ({ posts }: ComplexProps) => (
-  <Wrapper>
-    <S.Grid>
-      {posts.map((post) => (
-        <S.Card key={post.sys.id}>
-          <NextImage imageData={post.image} />
+  <>
+    {posts.map((post) => (
+      <S.Card key={post.sys.id}>
+        <NextImage imageData={post.image} />
 
-          <S.CardBody>
-            <S.PostTitle>
-              {post.title}
+        <S.CardBody>
+          <S.PostTitle>
+            {post.title}
 
-              <span>&bull;</span>
+            <span>&bull;</span>
 
-              <S.TimeToRead>{timeToRead(post.content)} min read</S.TimeToRead>
-            </S.PostTitle>
+            <S.TimeToRead>{timeToRead(post.content)} min read</S.TimeToRead>
+          </S.PostTitle>
 
-            <S.PreviewText>{post.previewText}</S.PreviewText>
+          <S.PreviewText>{post.previewText}</S.PreviewText>
 
-            <S.CategoriesList>
-              {post.categoriesCollection.items.map((category) => (
-                <S.CategoryItem key={category.sys.id} category={category.name}>
-                  <Link href={`/category/${category.slug}`}>{category.name}</Link>
-                </S.CategoryItem>
-              ))}
-            </S.CategoriesList>
+          <S.CategoriesList>
+            {post.categoriesCollection.items.map((category) => (
+              <S.CategoryItem key={category.sys.id} category={category.name}>
+                <Link href={`/category/${category.slug}`}>{category.name}</Link>
+              </S.CategoryItem>
+            ))}
+          </S.CategoriesList>
 
-            <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
-          </S.CardBody>
-        </S.Card>
-      ))}
-    </S.Grid>
-  </Wrapper>
+          <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
+        </S.CardBody>
+      </S.Card>
+    ))}
+  </>
 );
 
 export default Complex;

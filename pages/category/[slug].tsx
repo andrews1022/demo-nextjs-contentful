@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 // components
-import Simple from '../../components/BlogPosts/Simple/Simple';
+import BlogPosts from '../../components/BlogPosts/BlogPosts';
 import NextHead from '../../components/NextHead/NextHead';
 
 // styled components
@@ -150,7 +150,7 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ blogPostData }) => {
         <span style={{ fontWeight: 'normal' }}>Category Page for</span> {data.name}
       </MainHeading>
 
-      <Simple posts={data.linkedFrom.blogPostCollection.items} />
+      <BlogPosts mode='simple' posts={data.linkedFrom.blogPostCollection.items} />
     </>
   );
 };

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+// utils
+import { setCategoryItemBackgroundColor } from '../../utils/setCategoryItemBackgroundColor';
+
 export const Grid = styled.div`
   display: grid;
   grid-gap: 3.5vw;
@@ -38,7 +41,7 @@ export const CardBody = styled.div`
   margin-top: -4px;
   padding: 2rem;
 
-  a {
+  & > a {
     font-weight: ${({ theme }) => theme.fontWeights.bold};
 
     @media (hover) {
@@ -62,4 +65,25 @@ export const PostTitle = styled.h2`
 export const PreviewText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.copy.medium};
   margin: 1.25rem 0;
+`;
+
+export const CategoriesList = styled.ul`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+`;
+
+type CategoryItemProps = {
+  category: string;
+};
+
+export const CategoryItem = styled.li<CategoryItemProps>`
+  background-color: ${(props) => setCategoryItemBackgroundColor(props.category)};
+  padding: 0.5rem;
+`;
+
+export const TimeToRead = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.copy.small};
 `;

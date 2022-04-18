@@ -2,9 +2,9 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 // components
 import Author from '../../components/Author/Author';
+import BlogPosts from '../../components/BlogPosts/BlogPosts';
 import NextHead from '../../components/NextHead/NextHead';
 import NextImage from '../../components/NextImage/NextImage';
-import Simple from '../../components/BlogPosts/Simple/Simple';
 
 // styled components
 import * as S from '../../styles/blog.styles';
@@ -188,7 +188,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ data }) => {
         <S.RelatedPosts>
           <h2>Related Posts</h2>
 
-          <Simple posts={relatedBlogPosts.items} />
+          <BlogPosts mode='simple' posts={relatedBlogPosts.items} />
         </S.RelatedPosts>
       </S.Wrapper>
     </>

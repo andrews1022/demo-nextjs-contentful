@@ -1,7 +1,7 @@
 import type { GetStaticProps, NextPage } from 'next';
 
 // components
-import Complex from '../components/BlogPosts/Complex/Complex';
+import BlogPosts from '../components/BlogPosts/BlogPosts';
 
 // styled components
 import { MainHeading } from '../components/UI/MainHeading';
@@ -82,7 +82,7 @@ const Home: NextPage<HomeProps> = ({ data }) => (
   <>
     <MainHeading>Blog Posts</MainHeading>
 
-    <Complex posts={data.blogPostCollection.items} />
+    <BlogPosts mode='complex' posts={data.blogPostCollection.items} />
   </>
 );
 

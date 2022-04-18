@@ -1,8 +1,7 @@
 import Link from 'next/link';
 
 // styled components
-import * as S from './Simple.styles';
-import { Wrapper } from '../../UI/Wrapper';
+import * as S from '../BlogPosts.styles';
 
 // custom types
 import type { ContentfulBlogPost } from '../../../types/contentful';
@@ -13,21 +12,19 @@ type SimpleProps = {
 };
 
 const Simple = ({ posts }: SimpleProps) => (
-  <Wrapper>
-    <S.Grid>
-      {posts.map((post) => (
-        <S.Card key={post.sys.id}>
-          <S.CardBody>
-            <S.PostTitle>{post.title}</S.PostTitle>
+  <>
+    {posts.map((post) => (
+      <S.Card key={post.sys.id}>
+        <S.CardBody>
+          <S.PostTitle>{post.title}</S.PostTitle>
 
-            <S.PreviewText>{post.previewText}</S.PreviewText>
+          <S.PreviewText>{post.previewText}</S.PreviewText>
 
-            <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
-          </S.CardBody>
-        </S.Card>
-      ))}
-    </S.Grid>
-  </Wrapper>
+          <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
+        </S.CardBody>
+      </S.Card>
+    ))}
+  </>
 );
 
 export default Simple;
