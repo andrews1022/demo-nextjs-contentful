@@ -3,6 +3,9 @@ import type { GetStaticProps, NextPage } from 'next';
 // components
 import Complex from '../components/BlogPosts/Complex/Complex';
 
+// styled components
+import { MainHeading } from '../components/UI/MainHeading';
+
 // utils
 import { gql } from '../utils/gql';
 
@@ -11,7 +14,6 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../types/contentful';
-import { MainHeading } from '../components/UI/MainHeading';
 
 type GraphQLResponse = {
   data: {
@@ -77,11 +79,11 @@ export const getStaticProps: GetStaticProps = async () => {
 type HomeProps = GraphQLResponse;
 
 const Home: NextPage<HomeProps> = ({ data }) => (
-  <main>
+  <>
     <MainHeading>Blog Posts</MainHeading>
 
     <Complex posts={data.blogPostCollection.items} />
-  </main>
+  </>
 );
 
 export default Home;

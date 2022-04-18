@@ -5,6 +5,7 @@ import NextImage from '../../NextImage/NextImage';
 
 // styled components
 import * as S from './Complex.styles';
+import { Wrapper } from '../../UI/Wrapper';
 
 // utils
 import { timeToRead } from '../../../utils/timeToRead';
@@ -18,7 +19,7 @@ type ComplexProps = {
 };
 
 const Complex = ({ posts }: ComplexProps) => (
-  <S.Wrapper>
+  <Wrapper>
     <S.Grid>
       {posts.map((post) => (
         <S.Card key={post.sys.id}>
@@ -48,7 +49,7 @@ const Complex = ({ posts }: ComplexProps) => (
         </S.Card>
       ))}
     </S.Grid>
-  </S.Wrapper>
+  </Wrapper>
 );
 
 export default Complex;

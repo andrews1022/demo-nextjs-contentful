@@ -3,12 +3,6 @@ import styled from 'styled-components';
 // utils
 import { setCategoryItemBackgroundColor } from '../../../utils/setCategoryItemBackgroundColor';
 
-export const Wrapper = styled.div`
-  margin: 0 auto;
-  padding: 5% 0;
-  width: 90%;
-`;
-
 export const Grid = styled.div`
   display: grid;
   grid-gap: 3.5vw;

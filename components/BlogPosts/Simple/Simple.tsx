@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 // styled components
 import * as S from './Simple.styles';
+import { Wrapper } from '../../UI/Wrapper';
 
 // custom types
 import type { ContentfulBlogPost } from '../../../types/contentful';
@@ -12,7 +13,7 @@ type SimpleProps = {
 };
 
 const Simple = ({ posts }: SimpleProps) => (
-  <S.Wrapper>
+  <Wrapper>
     <S.Grid>
       {posts.map((post) => (
         <S.Card key={post.sys.id}>
@@ -26,7 +27,7 @@ const Simple = ({ posts }: SimpleProps) => (
         </S.Card>
       ))}
     </S.Grid>
-  </S.Wrapper>
+  </Wrapper>
 );
 
 export default Simple;
