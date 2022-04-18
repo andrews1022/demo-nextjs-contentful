@@ -6,11 +6,6 @@ export const Wrapper = styled.div`
   width: 90%;
 `;
 
-export const MainHeading = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.heading.large};
-  margin-bottom: 3.5vw;
-`;
-
 export const Grid = styled.div`
   display: grid;
   grid-gap: 3.5vw;

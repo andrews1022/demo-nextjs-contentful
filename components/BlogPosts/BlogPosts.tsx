@@ -19,7 +19,7 @@ type BlogPostsProps = {
 
 const BlogPosts = ({ posts }: BlogPostsProps) => (
   <S.Wrapper>
-    <S.MainHeading>Blog Posts</S.MainHeading>
+    {/* <S.MainHeading>Blog Posts</S.MainHeading> */}
 
     <S.Grid>
       {posts.map((post) => (
@@ -39,7 +39,9 @@ const BlogPosts = ({ posts }: BlogPostsProps) => (
 
             <ul className='categories-list'>
               {post.categoriesCollection.items.map((category) => (
-                <li key={category.sys.id}>{category.name}</li>
+                <li key={category.sys.id}>
+                  <Link href={`/category/${category.slug}`}>{category.name}</Link>
+                </li>
               ))}
             </ul>
 

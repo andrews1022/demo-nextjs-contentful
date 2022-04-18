@@ -131,7 +131,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
   <>
     {/* dyanmic head for seo */}
     <Head>
-      <title>{blogPostData.title} | Andrew Shearer Dev Portfolio</title>
+      <title>{blogPostData.title} | Next.js Contentful Blog</title>
       <meta name='description' content={blogPostData.title} />
     </Head>
 

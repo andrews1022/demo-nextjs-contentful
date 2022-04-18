@@ -12,6 +12,7 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../types/contentful';
+import { MainHeading } from '../components/UI/MainHeading';
 
 type GraphQLResponse = {
   data: {
@@ -78,6 +79,8 @@ type HomeProps = GraphQLResponse;
 
 const Home: NextPage<HomeProps> = ({ data }) => (
   <main>
+    <MainHeading>Blog Posts</MainHeading>
+
     <BlogPosts posts={data.blogPostCollection.items} />
   </main>
 );

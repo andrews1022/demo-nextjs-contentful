@@ -10,8 +10,8 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => (
   <>
     <Head>
-      <title>Andrew Shearer Dev Portfolio</title>
-      <meta name='description' content="Andrew Shearer's front end developer portfolio" />
+      <title>Next.js Contentful Blog</title>
+      <meta name='description' content='Next.js Contentful Blog' />
       <link rel='icon' href='/favicon.ico' />
     </Head>
 
