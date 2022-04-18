@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 // components
 import Author from '../../components/Author/Author';
+import Categories from '../../components/Categories/Categories';
 import BlogPosts from '../../components/BlogPosts/BlogPosts';
 import NextHead from '../../components/NextHead/NextHead';
 import NextImage from '../../components/NextImage/NextImage';
@@ -99,6 +100,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                   }
                   name
                 }
+                categoriesCollection {
+                  items {
+                    name
+                    sys {
+                      id
+                    }
+                  }
+                }
                 content
                 datePublished
                 image {
@@ -179,6 +188,17 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ data }) => {
             <strong>Estimated Time to Read: </strong>
             <span>{timeToRead(currentBlogPost.content)} min</span>
           </p>
+
+          <strong>&bull;</strong>
+
+          <p>
+            <strong>Categories: </strong>
+          </p>
+
+          <Categories
+            addMarginBottom={false}
+            categories={currentBlogPost.categoriesCollection.items}
+          />
         </S.InfoWrapper>
 
         <S.StyledReactMarkdown>{currentBlogPost.content}</S.StyledReactMarkdown>

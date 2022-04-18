@@ -11,6 +11,7 @@ import { timeToRead } from '../../../utils/timeToRead';
 
 // custom types
 import type { ContentfulBlogPost } from '../../../types/contentful';
+import Categories from '../../Categories/Categories';
 
 // props type
 type ComplexProps = {
@@ -34,13 +35,7 @@ const Complex = ({ posts }: ComplexProps) => (
 
           <S.PreviewText>{post.previewText}</S.PreviewText>
 
-          <S.CategoriesList>
-            {post.categoriesCollection.items.map((category) => (
-              <S.CategoryItem key={category.sys.id} category={category.name}>
-                <Link href={`/category/${category.slug}`}>{category.name}</Link>
-              </S.CategoryItem>
-            ))}
-          </S.CategoriesList>
+          <Categories addMarginBottom categories={post.categoriesCollection.items} />
 
           <Link href={`/blog/${post.slug}`}>Read Post &rarr;</Link>
         </S.CardBody>

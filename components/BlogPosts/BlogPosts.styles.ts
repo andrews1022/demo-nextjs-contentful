@@ -72,7 +72,6 @@ export const CategoriesList = styled.ul`
   align-items: center;
   flex-wrap: wrap;
   gap: 1.25rem;
-  margin-bottom: 1.25rem;
 `;
 
 type CategoryItemProps = {
