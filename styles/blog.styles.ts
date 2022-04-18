@@ -107,3 +107,9 @@ export const StyledReactMarkdown = styled(ReactMarkdown)`
     padding: 0.75rem;
   }
 `;
+
+export const RelatedPosts = styled.div`
+  h2 {
+    font-size: ${({ theme }) => theme.fontSizes.heading.small};
+  }
+`;

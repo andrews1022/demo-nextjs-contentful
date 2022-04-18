@@ -5,8 +5,9 @@ export const Wrapper = styled.div`
   align-items: center;
   gap: 1.5rem;
   border-top: 1px solid ${({ theme }) => theme.colors.nero};
-  margin-top: 2rem;
-  padding-top: 2rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.nero};
+  margin: 2rem 0;
+  padding: 2rem 0;
 
   @media ${({ theme }) => theme.mediaQueries.tabletPortrait} {
     flex-direction: column;

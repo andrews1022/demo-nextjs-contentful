@@ -4,6 +4,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 // components
 import Author from '../../components/Author/Author';
 import NextImage from '../../components/NextImage/NextImage';
+import Simple from '../../components/BlogPosts/Simple/Simple';
 
 // styled components
 import * as S from '../../styles/blog.styles';
@@ -20,7 +21,7 @@ import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 import type { ContentfulBlogPost } from '../../types/contentful';
 import type { IParams } from '../../types/global';
 
-type GraphQLResponse = {
+type PathsGraphQLResponse = {
   data: {
     blogPostCollection: {
       items: ContentfulBlogPost[];
@@ -52,13 +53,24 @@ export const getStaticPaths: GetStaticPaths = async () => {
     }
   );
 
-  const { data }: GraphQLResponse = await response.json();
+  const { data }: PathsGraphQLResponse = await response.json();
 
   const slugs = data.blogPostCollection.items.map((post) => ({ params: { slug: post.slug } }));
 
   return {
     paths: slugs,
     fallback: false // show 404 page
+  };
+};
+
+type PropsGraphQLResponse = {
+  data: {
+    currentBlogPost: {
+      items: ContentfulBlogPost[];
+    };
+    relatedBlogPosts: {
+      items: ContentfulBlogPost[];
+    };
   };
 };
 
@@ -78,7 +90,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       body: JSON.stringify({
         query: gql`
           query SingleBlogPostQuery($slug: String!) {
-            blogPostCollection(where: { slug: $slug }, limit: 1) {
+            currentBlogPost: blogPostCollection(where: { slug: $slug }, limit: 1) {
               items {
                 author {
                   bio
@@ -95,6 +107,17 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
                 title
               }
             }
+
+            relatedBlogPosts: blogPostCollection(where: { slug_not: $slug }, limit: 3) {
+              items {
+                previewText
+                slug
+                sys {
+                  id
+                }
+                title
+              }
+            }
           }
 
           ${FRAGMENT_CONTENTFUL_IMAGE}
@@ -106,56 +129,73 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  const { data }: GraphQLResponse = await response.json();
-
-  const [blogPostData] = data.blogPostCollection.items;
+  const { data }: PropsGraphQLResponse = await response.json();
 
   return {
     props: {
-      blogPostData
+      data
     }
   };
 };
 
 // props type
 type BlogPostPageProps = {
-  blogPostData: ContentfulBlogPost;
+  data: {
+    currentBlogPost: {
+      items: ContentfulBlogPost[];
+    };
+    relatedBlogPosts: {
+      items: ContentfulBlogPost[];
+    };
+  };
 };
 
-const BlogPostPage: NextPage<BlogPostPageProps> = ({ blogPostData }) => (
-  <>
-    {/* dyanmic head for seo */}
-    <Head>
-      <title>{blogPostData.title} | Next.js Contentful Blog</title>
-      <meta name='description' content={blogPostData.title} />
-    </Head>
+const BlogPostPage: NextPage<BlogPostPageProps> = ({ data }) => {
+  // destructure currentBlogPost & relatedBlogPosts out accordingly
+  const [currentBlogPost] = data.currentBlogPost.items;
+  const { relatedBlogPosts } = data;
 
-    <S.Wrapper>
-      <S.PostTitle>{blogPostData.title}</S.PostTitle>
+  return (
+    <>
+      {/* dyanmic head for seo */}
+      <Head>
+        <title>{currentBlogPost.title} | Next.js Contentful Blog</title>
+        <meta name='description' content={currentBlogPost.title} />
+      </Head>
 
-      <S.ImageWrapper>
-        <NextImage imageData={blogPostData.image} />
-      </S.ImageWrapper>
+      <S.Wrapper>
+        <S.PostTitle>{currentBlogPost.title}</S.PostTitle>
 
-      <S.InfoWrapper>
-        <p>
-          <strong>Date Published: </strong>
-          <span>{formatDate(blogPostData.datePublished)}</span>
-        </p>
+        <S.ImageWrapper>
+          <NextImage imageData={currentBlogPost.image} />
+        </S.ImageWrapper>
 
-        <strong>&bull;</strong>
+        <S.InfoWrapper>
+          <p>
+            <strong>Date Published: </strong>
+            <span>{formatDate(currentBlogPost.datePublished)}</span>
+          </p>
 
-        <p>
-          <strong>Estimated Time to Read: </strong>
-          <span>{timeToRead(blogPostData.content)} min</span>
-        </p>
-      </S.InfoWrapper>
+          <strong>&bull;</strong>
 
-      <S.StyledReactMarkdown>{blogPostData.content}</S.StyledReactMarkdown>
+          <p>
+            <strong>Estimated Time to Read: </strong>
+            <span>{timeToRead(currentBlogPost.content)} min</span>
+          </p>
+        </S.InfoWrapper>
 
-      <Author authorData={blogPostData.author} />
-    </S.Wrapper>
-  </>
-);
+        <S.StyledReactMarkdown>{currentBlogPost.content}</S.StyledReactMarkdown>
+
+        <Author authorData={currentBlogPost.author} />
+
+        <S.RelatedPosts>
+          <h2>Related Posts</h2>
+
+          <Simple posts={relatedBlogPosts.items} />
+        </S.RelatedPosts>
+      </S.Wrapper>
+    </>
+  );
+};
 
 export default BlogPostPage;
