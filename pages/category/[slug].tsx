@@ -1,5 +1,8 @@
-import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+
+// components
+import Simple from '../../components/BlogPosts/Simple/Simple';
+import NextHead from '../../components/NextHead/NextHead';
 
 // styled components
 import { MainHeading } from '../../components/UI/MainHeading';
@@ -10,7 +13,6 @@ import { gql } from '../../utils/gql';
 // custom types
 import type { ContentfulBlogPost, ContentfulCategory } from '../../types/contentful';
 import type { IParams } from '../../types/global';
-import Simple from '../../components/BlogPosts/Simple/Simple';
 
 type PathsGraphQLResponse = {
   data: {
@@ -142,10 +144,7 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ blogPostData }) => {
   return (
     <>
       {/* dyanmic head for seo */}
-      <Head>
-        <title>{data.name} | Next.js Contentful Blog</title>
-        <meta name='description' content={data.name} />
-      </Head>
+      <NextHead description={data.name} title={data.name} />
 
       <MainHeading>
         <span style={{ fontWeight: 'normal' }}>Category Page for</span> {data.name}

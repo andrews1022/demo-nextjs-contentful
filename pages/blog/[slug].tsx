@@ -1,8 +1,8 @@
-import Head from 'next/head';
 import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 // components
 import Author from '../../components/Author/Author';
+import NextHead from '../../components/NextHead/NextHead';
 import NextImage from '../../components/NextImage/NextImage';
 import Simple from '../../components/BlogPosts/Simple/Simple';
 
@@ -158,10 +158,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ data }) => {
   return (
     <>
       {/* dyanmic head for seo */}
-      <Head>
-        <title>{currentBlogPost.title} | Next.js Contentful Blog</title>
-        <meta name='description' content={currentBlogPost.title} />
-      </Head>
+      <NextHead description={currentBlogPost.title} title={currentBlogPost.title} />
 
       <S.Wrapper>
         <S.PostTitle>{currentBlogPost.title}</S.PostTitle>

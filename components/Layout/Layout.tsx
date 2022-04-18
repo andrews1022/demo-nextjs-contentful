@@ -1,19 +1,18 @@
-import Head from 'next/head';
 import type { ReactNode } from 'react';
+
+// components
 import Footer from '../Footer/Footer';
 import Nav from '../Nav/Nav';
+import NextHead from '../NextHead/NextHead';
 
+// props type
 type LayoutProps = {
   children: ReactNode;
 };
 
 const Layout = ({ children }: LayoutProps) => (
   <>
-    <Head>
-      <title>Next.js Contentful Blog</title>
-      <meta name='description' content='Next.js Contentful Blog' />
-      <link rel='icon' href='/favicon.ico' />
-    </Head>
+    <NextHead description='Next.js Contentful Blog by Andrew Shearer' />
 
     <Nav />
 
