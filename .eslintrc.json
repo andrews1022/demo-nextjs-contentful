@@ -47,6 +47,7 @@
     "no-trailing-spaces": "warn",
     "no-undef": "warn",
     "no-underscore-dangle": "warn",
+    "no-unneeded-ternary": "warn",
     "no-unused-vars": "warn",
     "no-use-before-define": "off",
     "no-useless-rename": "warn",

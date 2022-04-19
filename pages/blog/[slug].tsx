@@ -10,17 +10,22 @@ import NextImage from '../../components/NextImage/NextImage';
 // styled components
 import * as S from '../../styles/blog.styles';
 
+// api
+import { CONTENTFUL_GRAPHQL_API_ENDPOINT } from '../../api/endpoints';
+
 // utils
 import { gql } from '../../utils/gql';
 import { formatDate } from '../../utils/formatDate';
 import { timeToRead } from '../../utils/timeToRead';
 
-// graphql fragments
+// graphql
 import { FRAGMENT_CONTENTFUL_IMAGE } from '../../graphql/fragments';
 
 // custom types
 import type { ContentfulBlogPost } from '../../types/contentful';
 import type { IParams } from '../../types/global';
+import { queryContentful } from '../../api/functions';
+import { blogPostSlugsQuery, singleBlogPostQuery } from '../../graphql/queries';
 
 type PathsGraphQLResponse = {
   data: {
@@ -31,32 +36,33 @@ type PathsGraphQLResponse = {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // get contentful data
-  const response = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        query: gql`
-          query BlogPostSlugsQuery {
-            blogPostCollection {
-              items {
-                slug
-              }
-            }
-          }
-        `
-      })
-    }
-  );
+  // // get contentful data
+  // const response = await fetch(CONTENTFUL_GRAPHQL_API_ENDPOINT, {
+  //   headers: {
+  //     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+  //     'Content-Type': 'application/json'
+  //   },
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     query: gql`
+  //       query BlogPostSlugsQuery {
+  //         blogPostCollection {
+  //           items {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     `
+  //   })
+  // });
 
-  const { data }: PathsGraphQLResponse = await response.json();
+  // const { data }: PathsGraphQLResponse = await response.json();
 
-  const slugs = data.blogPostCollection.items.map((post) => ({ params: { slug: post.slug } }));
+  const { data } = await queryContentful<PathsGraphQLResponse>(blogPostSlugsQuery);
+
+  const slugs = data.blogPostCollection.items.map((post) => ({
+    params: { slug: post.slug }
+  }));
 
   return {
     paths: slugs,
@@ -79,66 +85,65 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   // get contentful data
   const { slug } = params as IParams;
 
-  // get contentful data
-  const response = await fetch(
-    `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({
-        query: gql`
-          query SingleBlogPostQuery($slug: String!) {
-            currentBlogPost: blogPostCollection(where: { slug: $slug }, limit: 1) {
-              items {
-                author {
-                  bio
-                  image {
-                    ...ImageFields
-                  }
-                  name
-                }
-                categoriesCollection {
-                  items {
-                    name
-                    sys {
-                      id
-                    }
-                  }
-                }
-                content
-                datePublished
-                image {
-                  ...ImageFields
-                }
-                title
-              }
-            }
+  // // get contentful data
+  // const response = await fetch(CONTENTFUL_GRAPHQL_API_ENDPOINT, {
+  //   headers: {
+  //     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+  //     'Content-Type': 'application/json'
+  //   },
+  //   method: 'POST',
+  //   body: JSON.stringify({
+  //     query: gql`
+  //       query SingleBlogPostQuery($slug: String!) {
+  //         currentBlogPost: blogPostCollection(where: { slug: $slug }, limit: 1) {
+  //           items {
+  //             author {
+  //               bio
+  //               image {
+  //                 ...ImageFields
+  //               }
+  //               name
+  //             }
+  //             categoriesCollection {
+  //               items {
+  //                 name
+  //                 sys {
+  //                   id
+  //                 }
+  //               }
+  //             }
+  //             content
+  //             datePublished
+  //             image {
+  //               ...ImageFields
+  //             }
+  //             title
+  //           }
+  //         }
 
-            relatedBlogPosts: blogPostCollection(where: { slug_not: $slug }, limit: 3) {
-              items {
-                previewText
-                slug
-                sys {
-                  id
-                }
-                title
-              }
-            }
-          }
+  //         relatedBlogPosts: blogPostCollection(where: { slug_not: $slug }, limit: 3) {
+  //           items {
+  //             previewText
+  //             slug
+  //             sys {
+  //               id
+  //             }
+  //             title
+  //           }
+  //         }
+  //       }
 
-          ${FRAGMENT_CONTENTFUL_IMAGE}
-        `,
-        variables: {
-          slug
-        }
-      })
-    }
-  );
+  //       ${FRAGMENT_CONTENTFUL_IMAGE}
+  //     `,
+  //     variables: {
+  //       slug
+  //     }
+  //   })
+  // });
 
-  const { data }: PropsGraphQLResponse = await response.json();
+  // const { data }: PropsGraphQLResponse = await response.json();
+
+  const { data } = await queryContentful<PropsGraphQLResponse>(singleBlogPostQuery, slug);
 
   return {
     props: {
