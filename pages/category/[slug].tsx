@@ -8,16 +8,14 @@ import NextHead from '../../components/NextHead/NextHead';
 import { MainHeading } from '../../components/UI/MainHeading';
 
 // api
-import { CONTENTFUL_GRAPHQL_API_ENDPOINT } from '../../api/endpoints';
+import { queryContentful } from '../../api/functions';
 
-// utils
-import { gql } from '../../utils/gql';
+// graphql
+import { categorySlugsQuery, postByCategoryQuery } from '../../graphql/queries';
 
 // custom types
 import type { ContentfulBlogPost, ContentfulCategory } from '../../types/contentful';
 import type { IParams } from '../../types/global';
-import { queryContentful } from '../../api/functions';
-import { categorySlugsQuery, postByCategoryQuery } from '../../graphql/queries';
 
 type PathsGraphQLResponse = {
   data: {
@@ -28,28 +26,6 @@ type PathsGraphQLResponse = {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // get contentful data
-  // const response = await fetch(CONTENTFUL_GRAPHQL_API_ENDPOINT, {
-  //   headers: {
-  //     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-  //     'Content-Type': 'application/json'
-  //   },
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     query: gql`
-  //       query CategorySlugsQuery {
-  //         categoryCollection {
-  //           items {
-  //             slug
-  //           }
-  //         }
-  //       }
-  //     `
-  //   })
-  // });
-
-  // const { data }: PathsGraphQLResponse = await response.json();
-
   const { data } = await queryContentful<PathsGraphQLResponse>(categorySlugsQuery);
 
   const slugs = data.categoryCollection.items.map((category) => ({
@@ -80,43 +56,6 @@ type PropsGraphQLResponse = {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   // get contentful data
   const { slug } = params as IParams;
-
-  // // get contentful data
-  // const response = await fetch(CONTENTFUL_GRAPHQL_API_ENDPOINT, {
-  //   headers: {
-  //     Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-  //     'Content-Type': 'application/json'
-  //   },
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     query: gql`
-  //       query PostByCategoryQuery($slug: String!) {
-  //         categoryCollection(where: { slug: $slug }) {
-  //           items {
-  //             linkedFrom {
-  //               blogPostCollection {
-  //                 items {
-  //                   previewText
-  //                   slug
-  //                   sys {
-  //                     id
-  //                   }
-  //                   title
-  //                 }
-  //               }
-  //             }
-  //             name
-  //           }
-  //         }
-  //       }
-  //     `,
-  //     variables: {
-  //       slug
-  //     }
-  //   })
-  // });
-
-  // const { data }: PropsGraphQLResponse = await response.json();
 
   const { data } = await queryContentful<PropsGraphQLResponse>(postByCategoryQuery, slug);
 
