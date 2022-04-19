@@ -1,5 +1,9 @@
 // graphql
-import { FRAGMENT_CONTENTFUL_IMAGE } from './fragments';
+import {
+  FRAGMENT_CONTENTFUL_CATEGORY,
+  FRAGMENT_CONTENTFUL_IMAGE,
+  FRAGMENT_CONTENTFUL_SIMPLE_POST
+} from './fragments';
 
 // utils
 import { gql } from '../utils/gql';
@@ -11,11 +15,7 @@ export const homepageQuery = gql`
       items {
         categoriesCollection {
           items {
-            sys {
-              id
-            }
-            name
-            slug
+            ...CategoryFields
           }
         }
         content
@@ -32,6 +32,7 @@ export const homepageQuery = gql`
     }
   }
 
+  ${FRAGMENT_CONTENTFUL_CATEGORY}
   ${FRAGMENT_CONTENTFUL_IMAGE}
 `;
 
@@ -53,12 +54,7 @@ export const postByCategoryQuery = gql`
         linkedFrom {
           blogPostCollection {
             items {
-              previewText
-              slug
-              sys {
-                id
-              }
-              title
+              ...SimplePostFields
             }
           }
         }
@@ -66,6 +62,8 @@ export const postByCategoryQuery = gql`
       }
     }
   }
+
+  ${FRAGMENT_CONTENTFUL_SIMPLE_POST}
 `;
 
 // blog posts
@@ -92,11 +90,7 @@ export const singleBlogPostQuery = gql`
         }
         categoriesCollection {
           items {
-            name
-            slug
-            sys {
-              id
-            }
+            ...CategoryFields
           }
         }
         content
@@ -110,15 +104,12 @@ export const singleBlogPostQuery = gql`
 
     relatedBlogPosts: blogPostCollection(where: { slug_not: $slug }, limit: 3) {
       items {
-        previewText
-        slug
-        sys {
-          id
-        }
-        title
+        ...SimplePostFields
       }
     }
   }
 
+  ${FRAGMENT_CONTENTFUL_CATEGORY}
   ${FRAGMENT_CONTENTFUL_IMAGE}
+  ${FRAGMENT_CONTENTFUL_SIMPLE_POST}
 `;

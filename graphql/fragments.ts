@@ -11,3 +11,24 @@ export const FRAGMENT_CONTENTFUL_IMAGE = gql`
     width
   }
 `;
+
+export const FRAGMENT_CONTENTFUL_CATEGORY = gql`
+  fragment CategoryFields on Category {
+    name
+    slug
+    sys {
+      id
+    }
+  }
+`;
+
+export const FRAGMENT_CONTENTFUL_SIMPLE_POST = gql`
+  fragment SimplePostFields on BlogPost {
+    previewText
+    slug
+    sys {
+      id
+    }
+    title
+  }
+`;
