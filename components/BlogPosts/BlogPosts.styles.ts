@@ -1,7 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // utils
-import { setCategoryItemBackgroundColor } from '../../utils/setCategoryItemBackgroundColor';
+import { setCategoryItemBackgroundColor } from "../../utils/setCategoryItemBackgroundColor";
+
+// prop types
+type CategoryItemProps = {
+  category: string;
+};
 
 export const Grid = styled.div`
   display: grid;
@@ -73,10 +78,6 @@ export const CategoriesList = styled.ul`
   flex-wrap: wrap;
   gap: 1.25rem;
 `;
-
-type CategoryItemProps = {
-  category: string;
-};
 
 export const CategoryItem = styled.li<CategoryItemProps>`
   background-color: ${(props) => setCategoryItemBackgroundColor(props.category)};

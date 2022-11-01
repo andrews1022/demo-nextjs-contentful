@@ -1,5 +1,5 @@
 // styled components
-import * as S from './Footer.styles';
+import * as S from "./Footer.styles";
 
 const Footer = () => (
   <S.Footer>

@@ -1,14 +1,14 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 // styled components
-import * as S from './Nav.styles';
+import * as S from "./Nav.styles";
 
 const Nav = () => (
   <S.Header>
-    <nav className='nav'>
+    <nav className="nav">
       <ul>
         <li>
-          <Link href='/'>Next.js Contentful Blog</Link>
+          <Link href="/">Next.js Contentful Blog</Link>
         </li>
       </ul>
     </nav>

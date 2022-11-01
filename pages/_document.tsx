@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
 
 // next
-import Document, { Head, Html, Main, NextScript } from 'next/document';
-import type { DocumentContext, DocumentInitialProps } from 'next/document';
+import Document, { Head, Html, Main, NextScript } from "next/document";
+import type { DocumentContext } from "next/document";
 
 // styled components
-import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet } from "styled-components";
 
 class MyDocument extends Document {
   static getInitialProps = async (ctx: DocumentContext): Promise<any> => {
@@ -20,7 +20,6 @@ class MyDocument extends Document {
 
       const initialProps = await Document.getInitialProps(ctx);
 
-      // can't use DocumentInitialProps as Promise type argument otherwise styles throws an error
       return {
         ...initialProps,
         styles: (
@@ -39,13 +38,14 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <link rel='preconnect' href='https://fonts.googleapis.com' />
-          <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='true' />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
           <link
-            href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
-            rel='stylesheet'
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+            rel="stylesheet"
           />
         </Head>
+
         <body>
           <Main />
           <NextScript />

@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 // components
-import Footer from '../Footer/Footer';
-import Nav from '../Nav/Nav';
-import NextHead from '../NextHead/NextHead';
+import Footer from "../Footer/Footer";
+import Nav from "../Nav/Nav";
+import NextHead from "../NextHead/NextHead";
 
 // props type
 type LayoutProps = {
@@ -12,7 +12,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => (
   <>
-    <NextHead description='Next.js Contentful Blog by Andrew Shearer' />
+    <NextHead description="Next.js Contentful Blog by Andrew Shearer" />
 
     <Nav />
 

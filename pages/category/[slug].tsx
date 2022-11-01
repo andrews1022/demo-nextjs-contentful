@@ -1,21 +1,21 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 // components
-import BlogPosts from '../../components/BlogPosts/BlogPosts';
-import NextHead from '../../components/NextHead/NextHead';
+import BlogPosts from "../../components/BlogPosts/BlogPosts";
+import NextHead from "../../components/NextHead/NextHead";
 
 // styled components
-import { MainHeading } from '../../components/UI/MainHeading';
+import { MainHeading } from "../../components/UI/MainHeading";
 
 // api
-import { queryContentful } from '../../api/functions';
+import { queryContentful } from "../../api/functions";
 
 // graphql
-import { categorySlugsQuery, postByCategoryQuery } from '../../graphql/queries';
+import { categorySlugsQuery, postByCategoryQuery } from "../../graphql/queries";
 
 // custom types
-import type { ContentfulBlogPost, ContentfulCategory } from '../../types/contentful';
-import type { IParams } from '../../types/global';
+import type { ContentfulBlogPost, ContentfulCategory } from "../../types/contentful";
+import type { IParams } from "../../types/global";
 
 type PathsGraphQLResponse = {
   data: {
@@ -89,10 +89,10 @@ const CategoryPage: NextPage<CategoryPageProps> = ({ blogPostData }) => {
       <NextHead description={data.name} title={data.name} />
 
       <MainHeading>
-        <span style={{ fontWeight: 'normal' }}>Category Page for</span> {data.name}
+        <span style={{ fontWeight: "normal" }}>Category Page for</span> {data.name}
       </MainHeading>
 
-      <BlogPosts mode='simple' posts={data.linkedFrom.blogPostCollection.items} />
+      <BlogPosts mode="simple" posts={data.linkedFrom.blogPostCollection.items} />
     </>
   );
 };

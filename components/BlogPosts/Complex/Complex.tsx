@@ -1,17 +1,17 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 // components
-import NextImage from '../../NextImage/NextImage';
+import NextImage from "../../NextImage/NextImage";
 
 // styled components
-import * as S from '../BlogPosts.styles';
+import * as S from "../BlogPosts.styles";
 
 // utils
-import { timeToRead } from '../../../utils/timeToRead';
+import { timeToRead } from "../../../utils/timeToRead";
 
 // custom types
-import type { ContentfulBlogPost } from '../../../types/contentful';
-import Categories from '../../Categories/Categories';
+import type { ContentfulBlogPost } from "../../../types/contentful";
+import Categories from "../../Categories/Categories";
 
 // props type
 type ComplexProps = {

@@ -1,7 +1,7 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 // custom types
-import { ContentfulImage } from '../../types/contentful';
+import { ContentfulImage } from "../../types/contentful";
 
 type NextImageProps = {
   imageData: ContentfulImage;
@@ -13,7 +13,7 @@ const NextImage = ({ imageData }: NextImageProps) => (
     alt={imageData.description}
     height={imageData.height}
     width={imageData.width}
-    placeholder='blur'
+    placeholder="blur"
     blurDataURL={imageData.url}
   />
 );

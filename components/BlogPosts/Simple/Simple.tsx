@@ -1,10 +1,10 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 // styled components
-import * as S from '../BlogPosts.styles';
+import * as S from "../BlogPosts.styles";
 
 // custom types
-import type { ContentfulBlogPost } from '../../../types/contentful';
+import type { ContentfulBlogPost } from "../../../types/contentful";
 
 // props type
 type SimpleProps = {

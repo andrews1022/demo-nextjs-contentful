@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import theme from './theme';
+import { createGlobalStyle } from "styled-components";
+import theme from "./theme";
 
 // destructured theme properties
 const { colors, fonts, fontSizes, lineHeights, mediaQueries } = theme;

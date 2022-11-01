@@ -3,10 +3,10 @@ import {
   FRAGMENT_CONTENTFUL_CATEGORY,
   FRAGMENT_CONTENTFUL_IMAGE,
   FRAGMENT_CONTENTFUL_SIMPLE_POST
-} from './fragments';
+} from "./fragments";
 
 // utils
-import { gql } from '../utils/gql';
+import { gql } from "../utils/gql";
 
 // home page
 export const homepageQuery = gql`

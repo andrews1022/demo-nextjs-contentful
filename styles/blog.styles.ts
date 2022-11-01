@@ -1,7 +1,7 @@
 // this file is used for styling 'pages/blog/[slug].tsx'
 
-import styled from 'styled-components';
-import ReactMarkdown from 'react-markdown';
+import styled from "styled-components";
+import ReactMarkdown from "react-markdown";
 
 export const Wrapper = styled.div`
   margin: 0 auto;

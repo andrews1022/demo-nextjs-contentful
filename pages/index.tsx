@@ -1,19 +1,19 @@
-import type { GetStaticProps, NextPage } from 'next';
+import type { GetStaticProps, NextPage } from "next";
 
 // components
-import BlogPosts from '../components/BlogPosts/BlogPosts';
+import BlogPosts from "../components/BlogPosts/BlogPosts";
 
 // styled components
-import { MainHeading } from '../components/UI/MainHeading';
+import { MainHeading } from "../components/UI/MainHeading";
 
 // api
-import { queryContentful } from '../api/functions';
+import { queryContentful } from "../api/functions";
 
 // graphql
-import { homepageQuery } from '../graphql/queries';
+import { homepageQuery } from "../graphql/queries";
 
 // custom types
-import type { ContentfulBlogPost } from '../types/contentful';
+import type { ContentfulBlogPost } from "../types/contentful";
 
 type PropsGraphQLResponse = {
   data: {
@@ -39,7 +39,7 @@ const Home: NextPage<HomeProps> = ({ data }) => (
   <>
     <MainHeading>Blog Posts</MainHeading>
 
-    <BlogPosts mode='complex' posts={data.blogPostCollection.items} />
+    <BlogPosts mode="complex" posts={data.blogPostCollection.items} />
   </>
 );
 

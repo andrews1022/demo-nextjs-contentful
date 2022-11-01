@@ -1,28 +1,28 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 // components
-import Author from '../../components/Author/Author';
-import Categories from '../../components/Categories/Categories';
-import BlogPosts from '../../components/BlogPosts/BlogPosts';
-import NextHead from '../../components/NextHead/NextHead';
-import NextImage from '../../components/NextImage/NextImage';
+import Author from "../../components/Author/Author";
+import Categories from "../../components/Categories/Categories";
+import BlogPosts from "../../components/BlogPosts/BlogPosts";
+import NextHead from "../../components/NextHead/NextHead";
+import NextImage from "../../components/NextImage/NextImage";
 
 // styled components
-import * as S from '../../styles/blog.styles';
+import * as S from "../../styles/blog.styles";
 
 // api
-import { queryContentful } from '../../api/functions';
+import { queryContentful } from "../../api/functions";
 
 // graphql
-import { blogPostSlugsQuery, singleBlogPostQuery } from '../../graphql/queries';
+import { blogPostSlugsQuery, singleBlogPostQuery } from "../../graphql/queries";
 
 // utils
-import { formatDate } from '../../utils/formatDate';
-import { timeToRead } from '../../utils/timeToRead';
+import { formatDate } from "../../utils/formatDate";
+import { timeToRead } from "../../utils/timeToRead";
 
 // custom types
-import type { ContentfulBlogPost } from '../../types/contentful';
-import type { IParams } from '../../types/global';
+import type { ContentfulBlogPost } from "../../types/contentful";
+import type { IParams } from "../../types/global";
 
 type PathsGraphQLResponse = {
   data: {
@@ -130,7 +130,7 @@ const BlogPostPage: NextPage<BlogPostPageProps> = ({ data }) => {
         <S.RelatedPosts>
           <h2>Related Posts</h2>
 
-          <BlogPosts mode='simple' posts={relatedBlogPosts.items} />
+          <BlogPosts mode="simple" posts={relatedBlogPosts.items} />
         </S.RelatedPosts>
       </S.Wrapper>
     </>

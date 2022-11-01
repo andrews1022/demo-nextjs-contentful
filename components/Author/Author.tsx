@@ -1,11 +1,11 @@
 // components
-import NextImage from '../NextImage/NextImage';
+import NextImage from "../NextImage/NextImage";
 
 // styled components
-import * as S from './Author.styles';
+import * as S from "./Author.styles";
 
 // custom types
-import { ContentfulAuthor } from '../../types/contentful';
+import { ContentfulAuthor } from "../../types/contentful";
 
 // props type
 type AuthorProps = {
@@ -18,7 +18,7 @@ const Author = ({ authorData }: AuthorProps) => (
       <NextImage imageData={authorData.image} />
     </S.ImageWrapper>
 
-    <S.TextWrapper className='text-wrapper'>
+    <S.TextWrapper>
       <h3>{authorData.name}</h3>
       <p>{authorData.bio}</p>
     </S.TextWrapper>
