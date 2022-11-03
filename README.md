@@ -1,3 +1,3 @@
-# Demo: Next.js + Contentful
+# Demo: Next + Contentful
 
-This is a static blog built using Next.js, Contentful, TypeScript, and Styled Components.
+This is a static blog built using Next, Contentful, TypeScript, and Styled Components.
